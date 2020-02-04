@@ -217,3 +217,9 @@ plugins:
   - jekyll-paginate
   - jekyll-sitemap
   - jemoji
+  
+## => Data collections
+##############################
+collections:
+  - projects:
+      output: true
