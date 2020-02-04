@@ -1,12 +1,8 @@
 ---
-title: Post with Header Image
-tags: TeXt
-article_header:
-  type: cover
-  image:
-    src: /screenshot.jpg
+title: Week 2
+tags: Week 2
 ---
 
-A Post with Header Image, See [Page layout](https://tianqi.name/jekyll-TeXt-theme/samples.html#page-layout) for more examples.
+My second project!
 
 <!--more-->
