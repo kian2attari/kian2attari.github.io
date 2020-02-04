@@ -27,4 +27,4 @@ key: page-about
 ---
 ![Kian](https://news.harvard.edu/wp-content/uploads/2019/01/020819_Winterfest_040_2500.jpg?w=1600&h=900&crop=1)
 
-I'm a sophomore at Harvard studying computer science. I love performing standup, playing quidditch, and axe throwing!
+I grew up in Dubai, UAE, and moved to the United States right before high school. I'm currently a Sophomore at Harvard studying Computer Science with a secondary in Neuroscience, and am passionate about out-of-the-box, scalable, and elegant solutions. In my free time, I do standup, play piano, and compete in collegiate quidditch as part of the Harvard Horntails.
