@@ -31,8 +31,8 @@ author:
   type      : person # "person" (default), "organization"
   name      : Kian Attari
   url       :
-  avatar    : # path or url of avatar image (square)
-  bio       : I am an amazing person.
+  avatar    : https://avatars0.githubusercontent.com/u/24510265?s=460&v=4
+  bio       : Sophomore at Harvard studying computer science!
   email     : kianattari@college.harvard.edu
   facebook  : # "user_name" the last part of your profile url, e.g. https://www.facebook.com/user_name
   twitter   : # "user_name" the last part of your profile url, e.g. https://twitter.com/user_name
