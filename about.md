@@ -25,7 +25,6 @@ titles:
   # @end locale config
 key: page-about
 ---
-## Hi! I'm Kian
 ![Kian](https://news.harvard.edu/wp-content/uploads/2019/01/020819_Winterfest_040_2500.jpg?w=1600&h=900&crop=1)
 
 I'm a sophomore at Harvard studying computer science. I love performing standup, playing quidditch, and axe throwing!
