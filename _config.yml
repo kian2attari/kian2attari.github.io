@@ -217,5 +217,6 @@ plugins:
   - jekyll-paginate
   - jekyll-sitemap
   - jemoji
+  - octopress-video-tag
   
 
