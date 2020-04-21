@@ -61,7 +61,7 @@ void loop() {
 
 Success!
 
-<video width="320" height="240" controls>
+<video width="640" height="480" controls>
   <source src="https://i.imgur.com/V2gOB7n.mp4" type="video/mp4">
 Your browser does not support the video tag.
 </video>
@@ -91,7 +91,7 @@ Resulting in:
 
 Once this was hooked up the Arduino, the readings worked beautifully.
 
-<video width="320" height="240" controls>
+<video width="640" height="480" controls>
   <source src="https://i.imgur.com/3PlUUYP.mp4" type="video/mp4">
 Your browser does not support the video tag.
 </video>
@@ -280,7 +280,135 @@ void loop() {
 }
 ```
 
+Once these produced an output, it was time to make the controller wireless using Bluetooth LE.
 
+I used a [gamepad library](https://github.com/lemmingDev/ESP32-BLE-Gamepad) here to setup the Huzzah as a broadcaster. 
+
+Here's the code I wrote up for the Huzzah. I will optimize it when I get the chance:
+
+```c
+/*
+ * A simple sketch that maps a single pin on the ESP32 to a single button on the controller
+ */
+
+#include <BleGamepad.h> 
+
+BleGamepad bleGamepad("Sexy Controller", "Attari INC", 100);
+
+int previousButton1State = HIGH;
+int previousButton2State = HIGH;
+int previousButton3State = HIGH;
+int previousButton4State = HIGH;
+
+int topButton = 12;
+int leftButton = 33;
+int lowButton = 15;
+int rightButton = 32;
+
+
+void setup() {
+  pinMode(topButton, INPUT_PULLUP); // Top button
+  pinMode(leftButton, INPUT_PULLUP); // Left button
+  pinMode(lowButton, INPUT_PULLUP); // Low button
+  pinMode(rightButton, INPUT_PULLUP); // Right button
+  bleGamepad.begin();
+}
+
+void loop() {
+  if(bleGamepad.isConnected()) {
+
+    int currentButton1State = digitalRead(topButton);
+    int currentButton2State = digitalRead(leftButton);
+    int currentButton3State = digitalRead(lowButton);
+    int currentButton4State = digitalRead(rightButton);
+
+    if (currentButton1State != previousButton1State)
+    {
+      if(currentButton1State == LOW)
+      {
+        bleGamepad.press(BUTTON_1);
+      }
+      else
+      {
+        bleGamepad.release(BUTTON_1);
+      }
+    }
+    previousButton1State = currentButton1State;
+    
+
+    if (currentButton2State != previousButton2State)
+    {
+      if(currentButton2State == LOW)
+      {
+        bleGamepad.press(BUTTON_2);
+      }
+      else
+      {
+        bleGamepad.release(BUTTON_2);
+      }
+    }
+    previousButton2State = currentButton2State;
+    
+
+    if (currentButton3State != previousButton3State)
+    {
+      if(currentButton3State == LOW)
+      {
+        bleGamepad.press(BUTTON_3);
+      }
+      else
+      {
+        bleGamepad.release(BUTTON_3);
+      }
+    }
+    previousButton3State = currentButton3State;
+
+
+    if (currentButton4State != previousButton4State)
+    {
+      if(currentButton4State == LOW)
+      {
+        bleGamepad.press(BUTTON_4);
+      }
+      else
+      {
+        bleGamepad.release(BUTTON_4);
+      }
+    }
+    previousButton4State = currentButton4State;
+  }
+}
+
+```
+
+Here's the intitial rough circuit I'm using to test this first run of the Bluetooth controller. It's a bulky mess just because I've snapped the controller onto the Uno as the power source just to test everything.
+
+![Image](https://i.imgur.com/d2q6FPc.jpg){:.border.rounded.shadow.image--xl}
+
+
+And it works!
+
+
+<video width="640" height="480" controls>
+  <source src="https://i.imgur.com/VLUWOQD.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
+To reduce the bulk, I wanna replace the portable battery with a smaller battery. In a quest for the ideal battery, I took apart an old PS3 controller.
+
+![Image](https://i.imgur.com/gRppvKn.jpg){:.border.rounded.shadow.image--xl}
+
+The battery here looked to be the perfect size at 3.7V.
+
+![Image](https://i.imgur.com/Cm5KSsz.jpg){:.border.rounded.shadow.image--xl}
+
+The Huzzah can run off a LiPo of this size (and charge it too!). Here's the 'slim' version of the bluetooth controller!
+
+![Image](https://i.imgur.com/5mXxcO7.jpg){:.border.rounded.shadow.image--xl}
+
+Since the Huzzah was charging the battery, the original power bank is still there but once the LiPo is charged, it won't be needed anymore. 
+
+I can slim this down even further by getting rid of the breadboard and connecting the Huzzah directly to the joystick.
 
 
 
