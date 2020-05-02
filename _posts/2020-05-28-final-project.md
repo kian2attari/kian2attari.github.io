@@ -720,4 +720,6 @@ void keyPressed() {
 
 To read more on the HID protocol, you can check out the [official documentation](https://usb.org/sites/default/files/documents/hid1_11.pdf) here!
 
+[This tutorial](https://eleccelerator.com/tutorial-about-usb-hid-report-descriptors/) also really helped me wrap my head around the HID report descriptors.
+
 
