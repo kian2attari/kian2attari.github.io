@@ -718,6 +718,6 @@ void keyPressed() {
 ```
 
 
-
+To read more on the HID protocol, you can check out the [official documentation](https://usb.org/sites/default/files/documents/hid1_11.pdf) here!
 
 
