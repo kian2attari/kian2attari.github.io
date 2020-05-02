@@ -434,6 +434,10 @@ float q1;
 float q2; 
 float q3;
 
+//float[] gravity = new float[3];
+//float[] euler = new float[3];
+//float[] ypr = new float[3];
+
 void setup() {
     // 600px square viewport using OpenGL rendering
     size(600, 600, OPENGL);
@@ -453,14 +457,14 @@ void setup() {
     port = new Serial(this, portName, 115200);
     
     port.bufferUntil('\n');
-    // This resets the axis on the gyro
+    
     port.write('r');
 }
 
 void draw() {
     
     // black background
-    background(0);
+    background(255);
     
     // translate everything to the middle of the viewport
     pushMatrix();
@@ -578,6 +582,14 @@ void drawCylinder(float topRadius, float bottomRadius, float tall, int sides) {
         }
         endShape();
     }
+}
+
+// Press r to reset the gyro
+void keyPressed() {
+  if (key == 'r') {
+     port.write('r');
+  }
+  println("r pressed!");
 }
 
 
