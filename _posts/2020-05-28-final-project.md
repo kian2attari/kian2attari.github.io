@@ -453,6 +453,8 @@ void setup() {
     port = new Serial(this, portName, 115200);
     
     port.bufferUntil('\n');
+    // This resets the axis on the gyro
+    port.write('r');
 }
 
 void draw() {
