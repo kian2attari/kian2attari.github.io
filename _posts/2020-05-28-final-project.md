@@ -3,8 +3,14 @@ title: Final project
 tags: Final-Project
 ---
 
-# Enter the discount matrix: reading brains on a budget
+# Enter the discount matrix
 
+For my final project, I wanted to build an input interface that can be used for video games that is designed to be used with only one hand. To accomplish this, I'm going to make two main input devices:
+
+- A one handed Oculus-like controller with one joystick, 6 buttons, and a built in IMU 
+- An EEG headset that reads brain waves (specifically focusing on a type of brain wave that roughly corrolates with focus)
+
+The IMU in the controller simulates a second joystick, while the readings of the headset can be thresholded to become its own input.
 
 ## The EEG headset component
 
@@ -95,6 +101,8 @@ Once this was hooked up the Arduino, the readings worked beautifully.
   <source src="https://i.imgur.com/3PlUUYP.mp4" type="video/mp4">
 Your browser does not support the video tag.
 </video>
+
+![Image](https://i.imgur.com/x0Ns2en.jpg){:.border.rounded.shadow.image--xl}
 
 ## The controller
 
@@ -721,5 +729,38 @@ void keyPressed() {
 To read more on the HID protocol, you can check out the [official documentation](https://usb.org/sites/default/files/documents/hid1_11.pdf) here!
 
 [This tutorial](https://eleccelerator.com/tutorial-about-usb-hid-report-descriptors/) also really helped me wrap my head around the HID report descriptors.
+
+
+## More photos
+
+![Image](https://i.imgur.com/62cG1hH.jpg){:.border.rounded.shadow.image--xl}
+
+![Image](https://i.imgur.com/1AGHwHe.jpg){:.border.rounded.shadow.image--xl}
+
+<video width="640" height="480" controls>
+  <source src="https://i.imgur.com/VFEnlMM.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
+<video width="640" height="480" controls>
+  <source src="https://i.imgur.com/1VB7yvn.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
+<video width="640" height="480" controls>
+  <source src="https://i.imgur.com/8wRjIVm.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
+![Image](https://i.imgur.com/5i73Y3L.jpg){:.border.rounded.shadow.image--xl}
+
+![Image](https://i.imgur.com/DxPzjyX.jpg){:.border.rounded.shadow.image--xl}
+
+<video width="640" height="480" controls>
+  <source src="https://i.imgur.com/qzu46aV.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
+![Image](https://i.imgur.com/O1I8yJ3.jpg){:.border.rounded.shadow.image--xl}
 
 
