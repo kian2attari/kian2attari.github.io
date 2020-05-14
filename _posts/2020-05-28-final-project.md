@@ -1,108 +1,14 @@
 ---
-title: Final project
-tags: Final-Project
+title: Final project Process
+tags: Final-Project-Process
 ---
 
 # Enter the discount matrix
 
-For my final project, I wanted to build an input interface that can be used for video games that is designed to be used with only one hand. To accomplish this, I'm going to make two main input devices:
+For my final project, I wanted to build a wireless and customizeable video game controller that can be used with one hand. Every one handed controller out there is constrained to having one thumbstick because of the whole one thumb on each hand thing. Unforunately, this means that we lose a whole 2 axis of control in our game. My design challenge was making this one-handed controller that gives the user comfortable control over two joysticks, each with their own x and y axis. To accomplish this, I'm going to incorporate an IMU, or Inertial Measurement Unit, into the controller. The IMU is a component that combines an accelerometer, gyroscope, and magnetometer into a single chip, allowing one to determine elements like the orientation and rotational velocity of the object its on. I can use these measurements to simulate the second joystick!
 
-- A one handed Oculus-like controller with one joystick, 6 buttons, and a built in IMU 
-- An EEG headset that reads brain waves (specifically focusing on a type of brain wave that roughly corrolates with focus)
+I also experimented with using brain waves as another mode of hands-free input, so I built an EEG headset that reads brain waves (specifically focusing on a type of brain wave that roughly corrolates with focus) out of an old star wars toy. The measurements work well, it's a technically feasible binary input medium, however, I decided to remove it from this project because it wasn't as easy and reliable to controll things with your brainwaves than with the controller. I included the documentation for the headset at the end of the page so you can still check that out!
 
-The IMU in the controller simulates a second joystick, while the readings of the headset can be thresholded to become its own input.
-
-## The EEG headset component
-
-To read brain signals, I purchased this Star Wars Force Trainer toy off eBay for $20.
-
-![Image](https://i.imgur.com/3BYftl7.jpg){:.border.rounded.shadow.image--xl}
-
-It contains a Neurosky chip used by far more expensive headsets that allows for accurate readings.
-
-![Image](https://i.imgur.com/IH121vd.jpg){:.border.rounded.shadow.image--xl}
-
-![Image](https://i.imgur.com/hQPFXeI.jpg){:.border.rounded.shadow.image--xl}
-
-To read the data from the headset, I'm going to solder a wire to the 'T' pin on the chip, and another to the negative terminal of its battery. Unfortunately, the current coronavirus situation has left me at home without access to my college lab and equipment, so forgive the rough soldering job. I only had a $10 Amazon soldering iron to work with. To maintain my commitment to safety, I built this soldering fan with a carbon filter.
-
-![Image](https://i.imgur.com/bkTqsnv.jpg){:.border.rounded.shadow.image--xl}
-
-And here's the soldering job:
-
-![Image](https://i.imgur.com/VcEwhXm.jpg){:.border.rounded.shadow.image--xl}
-
-The hot glue serves to support the extremely cheap solder I used and prevents the wire from being yanked out.
-
-
-I popped out the LED on the headset case so I could neatly pull the wires through its hole.
-
-![Image](https://i.imgur.com/IjmziDT.jpg){:.border.rounded.shadow.image--xl}
-
-
-![Image](https://i.imgur.com/XXG64JC.jpg){:.border.rounded.shadow.image--xl}
-
-![Image](https://i.imgur.com/zdBk7VR.jpg){:.border.rounded.shadow.image--xl}
-
-Now its time to test the data transmission.
-
-
-### First test of data transmission
-
-To see if the connection was successful, I wrote up a simple program to read the data from the serial RX pin.
-```c
-void setup() {
-  Serial.begin(9600);
-  Serial.println("serial delimit test 1.0"); // so I can keep track of what is loaded
-}
-
-void loop() {
-
-  if (Serial.available())  {
-    char c = Serial.read();  //gets one byte from serial buffer
-    Serial.println(c);
-  }
-}
-```
-
-Success!
-
-<video width="640" height="480" controls>
-  <source src="https://i.imgur.com/V2gOB7n.mp4" type="video/mp4">
-Your browser does not support the video tag.
-</video>
-
-Note that the output on the serial monitor is gibberish because the Arduino code tells it to expect 'char', or character data. Therefore, it's trying to map the brain wave readings to actual letters. Silly computer.
-
-### Getting some real readings
-
-To turn the gibberish into real readings, I modified the code from the very helpful [Brain Library](https://github.com/kitschpatrol/Brain) and [Neurosky Hacking Library](https://github.com/JimRoskind/NeuroskyHacking) to work with the particular headset I had. 
-
-I built this circuit to give me control of which reading I want to graph. The Neurosky chip records many different kind of brain waves like Theta, Alpha, Beta, Gamma, and also some interesting measurements like Meditation and Attention. Each of the 10 buttons toggles one of these readings. If you want to read more about how this works, you can refer to the Neurosky docs [here](http://developer.neurosky.com/docs/doku.php?id=thinkgear_connector_tgc).
-
-![Image](https://i.imgur.com/3wfuwkF.jpg){:.border.rounded.shadow.image--xl}
-
-![Image](https://i.imgur.com/sdhMAa2.jpg){:.border.rounded.shadow.image--xl}
-
-![Image](https://i.imgur.com/YaZTC2K.jpg){:.border.rounded.shadow.image--xl}
-
-I put the second circuit onto a protoboard for smaller form factor. I neatly twist tied everything.
-
-![Image](https://i.imgur.com/Cp2PHnZ.jpg){:.border.rounded.shadow.image--xl}
-
-Resulting in:
-
-
-![Image](https://i.imgur.com/kZghgbG.jpg){:.border.rounded.shadow.image--xl}
-
-Once this was hooked up the Arduino, the readings worked beautifully.
-
-<video width="640" height="480" controls>
-  <source src="https://i.imgur.com/3PlUUYP.mp4" type="video/mp4">
-Your browser does not support the video tag.
-</video>
-
-![Image](https://i.imgur.com/x0Ns2en.jpg){:.border.rounded.shadow.image--xl}
 
 ## The controller
 
@@ -419,7 +325,7 @@ Since the Huzzah was charging the battery, the original power bank is still ther
 I can slim this down even further by getting rid of the breadboard and connecting the Huzzah directly to the joystick.
 
 
-And here's the final code for the 7 button bluetooth configuration from my library!
+And here's the final code for the 7 button bluetooth configuration!
 
 ```c
 #include <BleGamepad.h> 
@@ -541,6 +447,27 @@ void buttonPress(int previousButtonState,int currentButtonState, int button) {
 ```
 
 ### Adding the IMU
+
+![Image](https://i.imgur.com/62cG1hH.jpg){:.border.rounded.shadow.image--xl}
+
+![Image](https://i.imgur.com/1AGHwHe.jpg){:.border.rounded.shadow.image--xl}
+
+To incorporate the IMU data into the controller and transmit it over bluetooth as the second joystick, I created [my own bluetooth controller library](https://github.com/kian2attari/joyduino-BLE) based on the one I used above. The IMU readings come from the [MPU9250 library](https://github.com/kian2attari/MPU-9250-ESP32-Library-Calibration-EEPROM) I wrote here. I wrote two versions of this MPU library, the first one that I just linked simple gets the raw data from the IMU and turns it into useful orientation and acceleration data on the ESP32. The second one [here](https://github.com/kian2attari/MPU-9250-DMP-ESP32-SAMD-Library) uses the onboard DMP, or Digital Motion Processor, on the MPU9250 to offload some of the calculations for the main microcontroller board. While that worked, I didn't end up using it because the orientation data it calculated was a bit unstable. Since there wasn't a visible delay introduced from just letting the Huzzah handle the calculations, using my first library was the way to go.
+
+Here's the raw IMU data being read with the library.
+
+<video width="640" height="480" controls>
+  <source src="https://i.imgur.com/1VB7yvn.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
+And here's the data being sent over bluetooth as part of the controller! 
+<video width="640" height="480" controls>
+  <source src="https://i.imgur.com/8wRjIVm.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
+### Visualizing the IMU data
 
 This processing sketch I wroteup uses the ToxicLib library to rotate a 3D object (a beautiful airplane model I found [here](https://github.com/jrowberg/i2cdevlib)) in terms of quaternions. 
 
@@ -726,31 +653,18 @@ void keyPressed() {
 ```
 
 
+<video width="640" height="480" controls>
+  <source src="https://i.imgur.com/VFEnlMM.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
+
 To read more on the HID protocol, you can check out the [official documentation](https://usb.org/sites/default/files/documents/hid1_11.pdf) here!
 
 [This tutorial](https://eleccelerator.com/tutorial-about-usb-hid-report-descriptors/) also really helped me wrap my head around the HID report descriptors.
 
 
 ## More photos
-
-![Image](https://i.imgur.com/62cG1hH.jpg){:.border.rounded.shadow.image--xl}
-
-![Image](https://i.imgur.com/1AGHwHe.jpg){:.border.rounded.shadow.image--xl}
-
-<video width="640" height="480" controls>
-  <source src="https://i.imgur.com/VFEnlMM.mp4" type="video/mp4">
-Your browser does not support the video tag.
-</video>
-
-<video width="640" height="480" controls>
-  <source src="https://i.imgur.com/1VB7yvn.mp4" type="video/mp4">
-Your browser does not support the video tag.
-</video>
-
-<video width="640" height="480" controls>
-  <source src="https://i.imgur.com/8wRjIVm.mp4" type="video/mp4">
-Your browser does not support the video tag.
-</video>
 
 ![Image](https://i.imgur.com/5i73Y3L.jpg){:.border.rounded.shadow.image--xl}
 
@@ -762,5 +676,98 @@ Your browser does not support the video tag.
 </video>
 
 ![Image](https://i.imgur.com/O1I8yJ3.jpg){:.border.rounded.shadow.image--xl}
+
+
+## The EEG headset component
+
+To read brain signals, I purchased this Star Wars Force Trainer toy off eBay for $20.
+
+![Image](https://i.imgur.com/3BYftl7.jpg){:.border.rounded.shadow.image--xl}
+
+It contains a Neurosky chip used by far more expensive headsets that allows for accurate readings.
+
+![Image](https://i.imgur.com/IH121vd.jpg){:.border.rounded.shadow.image--xl}
+
+![Image](https://i.imgur.com/hQPFXeI.jpg){:.border.rounded.shadow.image--xl}
+
+To read the data from the headset, I'm going to solder a wire to the 'T' pin on the chip, and another to the negative terminal of its battery. Unfortunately, the current coronavirus situation has left me at home without access to my college lab and equipment, so forgive the rough soldering job. I only had a $10 Amazon soldering iron to work with. To maintain my commitment to safety, I built this soldering fan with a carbon filter.
+
+![Image](https://i.imgur.com/bkTqsnv.jpg){:.border.rounded.shadow.image--xl}
+
+And here's the soldering job:
+
+![Image](https://i.imgur.com/VcEwhXm.jpg){:.border.rounded.shadow.image--xl}
+
+The hot glue serves to support the extremely cheap solder I used and prevents the wire from being yanked out.
+
+
+I popped out the LED on the headset case so I could neatly pull the wires through its hole.
+
+![Image](https://i.imgur.com/IjmziDT.jpg){:.border.rounded.shadow.image--xl}
+
+
+![Image](https://i.imgur.com/XXG64JC.jpg){:.border.rounded.shadow.image--xl}
+
+![Image](https://i.imgur.com/zdBk7VR.jpg){:.border.rounded.shadow.image--xl}
+
+Now its time to test the data transmission.
+
+
+### First test of data transmission
+
+To see if the connection was successful, I wrote up a simple program to read the data from the serial RX pin.
+```c
+void setup() {
+  Serial.begin(9600);
+  Serial.println("serial delimit test 1.0"); // so I can keep track of what is loaded
+}
+
+void loop() {
+
+  if (Serial.available())  {
+    char c = Serial.read();  //gets one byte from serial buffer
+    Serial.println(c);
+  }
+}
+```
+
+Success!
+
+<video width="640" height="480" controls>
+  <source src="https://i.imgur.com/V2gOB7n.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
+Note that the output on the serial monitor is gibberish because the Arduino code tells it to expect 'char', or character data. Therefore, it's trying to map the brain wave readings to actual letters. Silly computer.
+
+### Getting some real readings
+
+To turn the gibberish into real readings, I modified the code from the very helpful [Brain Library](https://github.com/kitschpatrol/Brain) and [Neurosky Hacking Library](https://github.com/JimRoskind/NeuroskyHacking) to work with the particular headset I had. 
+
+I built this circuit to give me control of which reading I want to graph. The Neurosky chip records many different kind of brain waves like Theta, Alpha, Beta, Gamma, and also some interesting measurements like Meditation and Attention. Each of the 10 buttons toggles one of these readings. If you want to read more about how this works, you can refer to the Neurosky docs [here](http://developer.neurosky.com/docs/doku.php?id=thinkgear_connector_tgc).
+
+![Image](https://i.imgur.com/3wfuwkF.jpg){:.border.rounded.shadow.image--xl}
+
+![Image](https://i.imgur.com/sdhMAa2.jpg){:.border.rounded.shadow.image--xl}
+
+![Image](https://i.imgur.com/YaZTC2K.jpg){:.border.rounded.shadow.image--xl}
+
+I put the second circuit onto a protoboard for smaller form factor. I neatly twist tied everything.
+
+![Image](https://i.imgur.com/Cp2PHnZ.jpg){:.border.rounded.shadow.image--xl}
+
+Resulting in:
+
+
+![Image](https://i.imgur.com/kZghgbG.jpg){:.border.rounded.shadow.image--xl}
+
+Once this was hooked up the Arduino, the readings worked beautifully.
+
+<video width="640" height="480" controls>
+  <source src="https://i.imgur.com/3PlUUYP.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
+![Image](https://i.imgur.com/x0Ns2en.jpg){:.border.rounded.shadow.image--xl}
 
 
