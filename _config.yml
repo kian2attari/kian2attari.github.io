@@ -208,6 +208,7 @@ defaults:
       show_edit_on_github: true
       show_subscribe: true
       pageview: true
+      show_excerpt: true
       cover: assets/images/default/page-single.jpg
 
 
