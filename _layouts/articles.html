@@ -40,6 +40,10 @@ layout: page
         {%- include article-list.html articles=_articles type='grid' size='sm' -%}
       {%- else -%}
         {%- include article-list.html articles=_articles type='grid' -%}
+	{%- include snippets/assign.html
+          target=site.data.variables.default.page.articles.show_excerpt
+          source0=layout.articles.show_excerpt source1=page.articles.show_excerpt -%}
+      	{%- assign _show_excerpt = __return -%}
       {%- endif -%}
 
     {%- elsif _type == 'brief' -%}
