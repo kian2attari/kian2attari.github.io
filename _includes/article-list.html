@@ -135,13 +135,13 @@
                   <a href="{{ _article_url }}"><h2 class="card__header">{{ _article.title }}</h2></a>
                 </header>
 	    {%- if _article.excerpt and include.show_excerpt -%}
-	      <div class="article__content" itemprop="description articleBody">
-	        {%- if _excerpt_type == 'html' -%}
-	          {{ _article.excerpt }}
-	        {%- else -%}
-	          {{ _article.excerpt | strip_html | strip | truncate: _excerpt_truncate }}
-	        {%- endif -%}
-	      </div>
+              <div class="article__content" itemprop="description articleBody">
+                {%- if _excerpt_type == 'html' -%}
+                  {{ _article.excerpt }}
+                {%- else -%}
+                  {{ _article.excerpt | strip_html | strip | truncate: _excerpt_truncate }}
+                {%- endif -%}
+              </div>
 	    {%- endif -%}
               </div>
           </div>

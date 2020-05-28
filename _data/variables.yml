@@ -25,6 +25,7 @@ default:
       show_cover: true
       show_excerpt: true
       show_readmore: false
+      excerpt_type: text
       show_info: false
       type: grid
     show_title: true
