@@ -208,7 +208,7 @@ defaults:
       show_edit_on_github: true
       show_subscribe: true
       pageview: true
-      cover: /docs/assets/images/default/page-single.jpg
+      cover: assets/images/default/page-single.jpg
 
 
 ## => Plugins
