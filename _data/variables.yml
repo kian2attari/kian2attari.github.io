@@ -4,7 +4,7 @@ default:
   lang: en
   paths:
     root: /
-    home: /
+    home: /home.html
     archive:  /archive.html
     rss:  /feed.xml
   mathjax: false
@@ -33,7 +33,7 @@ default:
     show_tags: true
     show_author_profile: false
     show_subscribe: false
-    full_width: true
+    full_width: false
     sharing: false
     comment: true
     license: false
