@@ -3,6 +3,10 @@ title: Final project Process
 tags: Final-Project-Process
 ---
 
+Designing and building a one-handed, wireless, motion-controlled video game controller! (I also hack an old star wars toy to read my brain waves)
+
+<!--more-->
+
 # Enter the discount matrix
 
 For my final project, I wanted to build a wireless and customizeable video game controller that can be used with one hand. Every one handed controller out there is constrained to having one thumbstick because of the whole one thumb on each hand thing. Unforunately, this means that we lose a whole 2 axis of control in our game. My design challenge was making this one-handed controller that gives the user comfortable control over two joysticks, each with their own x and y axis. To accomplish this, I'm going to incorporate an IMU, or Inertial Measurement Unit, into the controller. The IMU is a component that combines an accelerometer, gyroscope, and magnetometer into a single chip, allowing one to determine elements like the orientation and rotational velocity of the object its on. I can use these measurements to simulate the second joystick!
