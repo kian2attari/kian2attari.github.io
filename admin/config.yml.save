@@ -1,0 +1,9 @@
+backend:
+  name: git-gateway
+  branch: master # Branch to update (optional; defaults to master)
+
+# This line should *not* be indented
+media_folder: "assets/images/uploads" # Media files will be stored in the repo under images/uploads
+
+collections:
+	https://avatars0.githubusercontent.com/u/24510265?s=460&v=4
