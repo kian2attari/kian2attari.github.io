@@ -33,7 +33,16 @@ layout: page
 
 {%- if _articles -%}
 
+	<div class="button-group filter-button-group">
+	{% for tag in site.tags %}
+		<a id = "filter-button" class="button" data-filter=".{{ tag | first }}">{{ tag | first }}</a>
+	{% endfor %}
+		<a id = "filter-button" class="button active" data-filter="*">All</a>
+	</div>
+
+
   <div class="layout--articles">
+
 
     {%- if _type == 'grid' -%}
       {%- if page.articles.size == 'sm' -%}
