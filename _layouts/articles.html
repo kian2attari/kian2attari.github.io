@@ -40,6 +40,7 @@ layout: page
         {%- include article-list.html articles=_articles type='grid' size='sm' -%}
       {%- else -%}
 
+
         {%- include snippets/assign.html
             target=site.data.variables.default.page.articles.show_excerpt
             source0=layout.articles.show_excerpt source1=page.articles.show_excerpt -%}
@@ -47,7 +48,11 @@ layout: page
 	{%- assign _show_excerpt = __return -%}
         {%- assign _excerpt_type = page.articles.excerpt_type | default: layout.articles.excerpt_type -%}
 
+	
+
         {%- include article-list.html articles=_articles type='grid' show_excerpt=_show_excerpt excerpt_type=_excerpt_type-%}
+
+	{%- include category-filter-isotope.html -%}
       {%- endif -%}
 
     {%- elsif _type == 'brief' -%}

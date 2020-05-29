@@ -1,0 +1,39 @@
+<div class="button-group filter-button-group">
+	{% for tag in site.tags %}
+		<a class="button" data-filter=".{{ tag | first }}">{{ tag | first }}</a>
+	{% endfor %}
+		<a class="button active" data-filter="*">All</a>
+</div>
+
+<div class="sidenav">
+  <a href="#">About</a>
+  <a href="#">Services</a>
+  <a href="#">Clients</a>
+  <a href="#">Contact</a>
+</div>
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" ></script>
+<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+<script>
+	// init Isotope
+	var $grid = $('.article-list').isotope({
+	  // options
+	  itemSelector: '.grid-item',
+	      percentPosition: true,
+	      layoutMode: 'fitRows',
+	});
+	// filter items on button click
+	$('.filter-button-group').on( 'click', 'a', function() {
+	  var filterValue = $(this).attr('data-filter');
+	  $grid.isotope({ filter: filterValue });
+	});
+	$('.button-group a.button').on('click', function(){
+		$('.button-group a.button').removeClass('active');
+		$(this).addClass('active');
+	});
+</script>
+
